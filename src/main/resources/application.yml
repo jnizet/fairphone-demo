@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fairphone
+    username: fairphone
+    password: fairphone
