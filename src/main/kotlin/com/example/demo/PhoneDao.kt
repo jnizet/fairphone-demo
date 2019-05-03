@@ -1,17 +1,29 @@
 package com.example.demo
 
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
-import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
+import javax.persistence.EntityManager
 
 /**
  * TODO include class javadoc here
  * @author JB Nizet
  */
-interface PhoneDao : JpaRepository<Phone, Long>, PhoneDaoCustom {
+@Repository
+class PhoneDao(var em: EntityManager) {
 
-    @Query("select phone from Phone phone where name = :name order by phone.id desc")
-    fun findByNameHeyHey(@Param("name") name: String): List<Phone>
+    fun listPhones(): List<String> {
+        return listOf("FairPhone 1", "FairPhone 2")
+    }
+
+    @Transactional
+    fun getPhone(id: Long): PhoneEntity? {
+        val phone = em.find(PhoneEntity::class.java, id)
+        return phone
+    }
+
+    fun findAll(name: String): List<PhoneEntity> {
+        return em.createQuery("select p from PhoneEntity p where p.name = :name", PhoneEntity::class.java)
+            .setParameter("name", name)
+            .resultList
+    }
 }
-
-

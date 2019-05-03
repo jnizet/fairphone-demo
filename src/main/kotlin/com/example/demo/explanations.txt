@@ -1,0 +1,18 @@
+PHONE
+------
+
+ID (PK)    NAME         PHONE_MODEL
+-----------------------------
+1         Fairphone    1.0
+2         Fairphone    2.0
+
+BUYER
+-----
+
+ID       FIRSTNAME   LASTNAME
+
+
+BUYER_PHONE
+-----------
+
+PHONE_ID     BUYER_ID
